@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 const Header = () => {
   return (
     <header className="py-8 xl:py-12 text-white">
-      <div className="container mx-20 flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center">
         <LogoLink />
         {/*Desktop navigation */}
         <div className="hidden xl:flex items-center gap-8">

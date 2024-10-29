@@ -7,11 +7,13 @@ import { CiMenuFries } from "react-icons/ci";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import LogoLink from "../ui/LogoLink";
 import { links } from "./constants";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 const MobileNavigation = () => {
   const pathname = usePathname();
   return (
     <Sheet>
+      <DialogTitle hidden />
       <SheetTrigger className="flex justify-center items-center">
         <CiMenuFries className="text-[32px] text-accent" />
       </SheetTrigger>
