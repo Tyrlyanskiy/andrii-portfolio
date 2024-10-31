@@ -8,25 +8,29 @@ const services = [
   {
     num: "01",
     title: "Web Development",
-    description: "description",
+    description:
+      "Skilled in creating responsive, user-friendly interfaces with a focus on performance and accessibility, I leverage modern frameworks and tools to deliver intuitive, engaging web applications that meet both user needs and business objectives.",
     href: "",
   },
   {
     num: "02",
-    title: "Beckend Development",
-    description: "description",
+    title: "Backend Development",
+    description:
+      "Proficient in building secure, scalable, and efficient backend systems, I design architectures that handle complex data processing and integrate seamlessly with front-end applications and third-party services.",
     href: "",
   },
   {
     num: "03",
     title: "Cloud Architecture",
-    description: "description",
+    description:
+      "Experienced in cloud infrastructure design and management, I architect solutions that optimize resource use, enhance system scalability, and ensure robust security, leveraging best practices to support seamless deployment and maintenance.",
     href: "",
   },
   {
     num: "04",
     title: "QA Automation",
-    description: "description",
+    description:
+      "Strong background in quality assurance automation, developing comprehensive testing frameworks to ensure software reliability and performance, streamline release cycles, and reduce manual testing efforts.",
     href: "",
   },
 ];

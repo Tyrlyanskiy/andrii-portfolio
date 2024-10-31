@@ -16,8 +16,10 @@ const Home = () => {
               Hello I am <br /> <span className="text-accent">Andrii D.</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-              about me about me about me about me about me about me about me
-              about me .
+              Experienced Lead Full Stack Developer skilled in web and backend
+              development, cloud architecture, and QA automation. Passionate
+              learner, multilingual, and culturally diverse, balancing tech
+              expertise with creativity.
             </p>
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <Button
