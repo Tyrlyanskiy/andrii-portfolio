@@ -227,7 +227,6 @@ const Resume = () => {
                   </ul>
                 </ScrollArea>
               </div>
-              );
             </TabsContent>
             <TabsContent value="skills" className="w-full h-full">
               <div className="flex flex-col gap-[30px]">
