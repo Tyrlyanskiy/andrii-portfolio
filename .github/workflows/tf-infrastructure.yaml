@@ -44,5 +44,5 @@ jobs:
         with:
           working_dir: infrastructure
           applyChanges: ${{ (github.event_name != 'pull_request') || 'false' }}
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_access_secret: ${{ secrets.AWS_ACCESS_SECRET }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_access_secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
