@@ -27,6 +27,7 @@ runs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
+        run: echo ${{ inputs.aws_access_key }}
         aws-access-key-id: ${{ inputs.aws_access_key }}
         aws-secret-access-key: ${{ inputs.aws_access_secret }}
         aws-region: eu-central-1
