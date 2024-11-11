@@ -38,7 +38,7 @@ jobs:
               - 'infrastructure/*.tfvars'
               - 'infrastructure/modules/**/*.tf'
 
-      - uses: .github/workflows/actions/terraform
+      - uses: /.github/workflows/actions/terraform
         name: Deploy Infrastructure
         if: ${{ steps.changes.outputs.infra == 'true'}}
         with:
