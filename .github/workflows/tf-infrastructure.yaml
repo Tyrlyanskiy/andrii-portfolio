@@ -1,0 +1,49 @@
+---
+name: 🏠 Infrastructure
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'infrastructure/**.tf'
+      - 'infrastructure/**.tfvars'
+      - 'infrastructure/**.yaml'
+      - '.github/workflows/tf-infrastructure.yaml'
+
+    branches: [main]
+
+  pull_request:
+    paths:
+      - 'infrastructure/**.tf'
+      - 'infrastructure/**.tfvars'
+      - 'infrastructure/**.yaml'
+      - '.github/workflows/tf-infrastructure.yaml'
+
+    branches: [main]
+
+jobs:
+  changes:
+    runs-on: 'ubuntu-latest'
+    environment: 'production'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            infra:
+              - 'infrastructure/*.tf'
+              - 'infrastructure/*.tfvars'
+              - 'infrastructure/modules/**/*.tf'
+
+      - uses: ./.github/workflows/actions/terraform
+        name: Deploy Infrastructure
+        if: ${{ steps.changes.outputs.infra == 'true'}}
+        with:
+          working_dir: infrastructure
+          applyChanges: ${{ (github.event_name != 'pull_request') || 'false' }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_access_secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

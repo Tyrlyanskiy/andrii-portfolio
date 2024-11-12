@@ -1,0 +1,59 @@
+---
+name: Terraform
+description: Build and deploy terraform
+
+# Define triggers when triggered
+inputs:
+  working_dir:
+    description: The working directory
+    required: true
+  applyChanges:
+    required: true
+    description: Whether to perform terraform apply
+  aws_access_key:
+    description: "The AWS access key"
+    required: true
+  aws_access_secret:
+    description: "The AWS access secret"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ inputs.aws_access_key }}
+        aws-secret-access-key: ${{ inputs.aws_access_secret }}
+        aws-region: eu-central-1
+
+    - name: Terraform Init
+      shell: bash
+      id: init
+      run: terraform init
+      working-directory: ${{ inputs.working_dir }}
+
+    - name: Terraform Validate
+      shell: bash
+      id: validate
+      run: terraform validate -no-color
+      working-directory: ${{ inputs.working_dir }}
+
+    - name: Terraform Plan
+      shell: bash
+      id: plan
+      run: terraform plan -no-color
+      working-directory: ${{ inputs.working_dir }}
+      env:
+        TF_IN_AUTOMATION: "1"
+
+    - name: Terraform Apply
+      if: inputs.applyChanges == 'true'
+      working-directory: ${{ inputs.working_dir }}
+      shell: bash
+      id: apply
+      run: terraform apply -auto-approve -no-color

@@ -1,0 +1,38 @@
+name: Test and Release Frontend
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/checks.yaml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/release-fe.yaml'
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: my-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install node
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
