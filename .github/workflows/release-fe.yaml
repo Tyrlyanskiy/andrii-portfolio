@@ -1,11 +1,17 @@
-name: Test and Release
+name: Test and Release Frontend
 on:
   workflow_dispatch: {}
   push:
     branches: [main]
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/checks.yaml'
 
   pull_request:
     branches: [main]
+    paths:
+      - 'my-app/**'
+      - '.github/workflows/release-fe.yaml'
 
 jobs:
   test-frontend:
