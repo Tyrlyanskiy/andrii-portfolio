@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "andrii-d-code-site" {
-  bucket = var.andrii-d-code-site-bucket-name
+  bucket = "andrii.d.code-documents"
   tags = {
     Environment = "Prod"
   }
