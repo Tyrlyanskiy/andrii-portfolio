@@ -1,6 +1,6 @@
-import type { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
   const url = req.url?.split("url=").pop();
 
   if (!url) {
