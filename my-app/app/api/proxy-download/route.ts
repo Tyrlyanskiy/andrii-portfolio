@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(decodeURIComponent(url));
     return response;
   } catch (error) {
     throw error;
