@@ -16,8 +16,7 @@ const Home = () => {
     const fileName = url.split("/").pop();
     if (!fileName) return;
 
-    const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-    const response = await fetch(proxyUrl);
+    const response = await fetch(`/api/proxy-download?url=${url}`);
 
     if (!response.ok) return;
 
