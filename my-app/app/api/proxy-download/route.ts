@@ -1,6 +1,4 @@
-import { NextRequest } from "next/server";
-
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
   const url = req.url?.split("url=").pop();
 
   if (!url) {
@@ -8,7 +6,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(decodeURIComponent(url));
     return response;
   } catch (error) {
     throw error;
