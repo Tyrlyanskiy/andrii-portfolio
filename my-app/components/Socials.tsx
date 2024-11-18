@@ -6,17 +6,17 @@ const socials = [
   {
     icon: <FaGithub />,
     name: "github",
-    path: "https://github.com/Tyrlyanskiy",
+    path: process.env.MY_GITHUB || "",
   },
   {
     icon: <FaLinkedin />,
     name: "linkedin",
-    path: "https://www.linkedin.com/in/andrii-diachenko-117a2b39/",
+    path: process.env.MY_LINKEDIN || "",
   },
   {
     icon: <FaXing />,
     name: "xing",
-    path: "https://www.xing.com/profile/Andrii_Diachenko/web_profiles",
+    path: process.env.MY_XING || "",
   },
 ];
 
@@ -30,7 +30,12 @@ const Social = ({ containerStyles, iconStyles }: SocialProps) => {
     <div className={containerStyles}>
       {socials.map((social) => {
         return (
-          <Link href={social.path} key={social.name} className={iconStyles}>
+          <Link
+            href={social.path}
+            key={social.name}
+            target="_blank"
+            className={iconStyles}
+          >
             {social.icon}
           </Link>
         );

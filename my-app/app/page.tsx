@@ -1,3 +1,5 @@
+"use client";
+
 import { FiDownload } from "react-icons/fi";
 
 import { Button } from "@/components/ui/button";
@@ -6,6 +8,31 @@ import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
 
 const Home = () => {
+  const CV_PUBLIC_URL = process.env.CV_PUBLIC_URL || "";
+
+  const downloadFileAtUrl = async (url: string) => {
+    if (!url) return;
+
+    const fileName = url.split("/").pop();
+    if (!fileName) return;
+
+    const response = await fetch(`/api/proxy-download?url=${encodeURI(url)}`);
+
+    if (!response.ok) return;
+
+    const blob = await response.blob();
+
+    const blobUrl = window.URL.createObjectURL(blob);
+
+    const aTag = document.createElement("a");
+    aTag.href = blobUrl;
+    aTag.setAttribute("download", fileName);
+    document.body.appendChild(aTag);
+    aTag.click();
+    aTag.remove();
+    window.URL.revokeObjectURL(blobUrl);
+  };
+
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
@@ -26,6 +53,9 @@ const Home = () => {
                 variant="outline"
                 size="lg"
                 className="uppercase flex items-center gap-2"
+                onClick={() => {
+                  downloadFileAtUrl(CV_PUBLIC_URL);
+                }}
               >
                 <span>Download CV</span>
                 <FiDownload className="text-xl" />
