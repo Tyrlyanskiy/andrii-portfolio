@@ -1,4 +1,5 @@
 "use client";
+
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -19,12 +20,12 @@ const info = [
   {
     icon: <FaPhoneAlt />,
     title: "Phone",
-    description: "(+49) 173 21 88 000",
+    description: process.env.MY_PHONE,
   },
   {
     icon: <FaEnvelope />,
     title: "Email",
-    description: "andrii.d.code@gmail.com",
+    description: process.env.MY_EMAIL,
   },
   {
     icon: <FaMapMarkedAlt />,
