@@ -6,7 +6,11 @@ export async function GET(req: Request) {
   }
 
   try {
-    const response = await fetch(decodeURIComponent(url));
+    const response = await fetch(decodeURIComponent(url), {
+      headers: {
+        "Accept-Encoding": "identity",
+      },
+    });
     return response;
   } catch (error) {
     throw error;
