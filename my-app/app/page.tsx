@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import Social from "@/components/Socials";
 import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
+import { useState } from "react";
 
 const Home = () => {
+  const [loading, setLoading] = useState(false);
   //use public URL from cloudfront
   const CV_PUBLIC_URL = process.env.CV_PUBLIC_URL || "";
 
@@ -17,9 +19,14 @@ const Home = () => {
     const fileName = url.split("/").pop();
     if (!fileName) return;
 
+    setLoading(true);
+
     const response = await fetch(`/api/proxy-download?url=${url}`);
 
-    if (!response.ok) return;
+    if (!response.ok) {
+      setLoading(false);
+      return;
+    }
 
     const blob = await response.blob();
 
@@ -32,6 +39,7 @@ const Home = () => {
     aTag.click();
     aTag.remove();
     window.URL.revokeObjectURL(blobUrl);
+    setLoading(false);
   };
 
   return (
@@ -51,15 +59,21 @@ const Home = () => {
             </p>
             <div className="flex flex-col xl:flex-row items-center gap-8">
               <Button
-                variant="outline"
+                disabled={loading}
+                variant={loading ? "disabled" : "outline"}
                 size="lg"
                 className="uppercase flex items-center gap-2"
                 onClick={() => {
                   downloadFileAtUrl(CV_PUBLIC_URL);
                 }}
               >
-                <span>Download CV</span>
-                <FiDownload className="text-xl" />
+                {loading && <span>Loading...</span>}
+                {!loading && (
+                  <>
+                    <span>Download CV</span>
+                    <FiDownload className="text-xl" />
+                  </>
+                )}
               </Button>
               <div className="mb-8 xl:mb-0">
                 <Social
