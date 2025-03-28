@@ -8,6 +8,7 @@ import Photo from "@/components/Photo";
 import Stats from "@/components/Stats";
 
 const Home = () => {
+  //use public URL from cloudfront
   const CV_PUBLIC_URL = process.env.CV_PUBLIC_URL || "";
 
   const downloadFileAtUrl = async (url: string) => {
